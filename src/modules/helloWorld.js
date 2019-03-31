@@ -1,5 +1,6 @@
+import { createReducer } from "redux-starter-kit";
 import { ofType } from "redux-observable";
-import { map, switchMap, mergeMap } from "rxjs/operators";
+import { map, mergeMap } from "rxjs/operators";
 
 // acctions
 const withPrefix = action => `HELLO_WORLD/${action}`;
@@ -12,22 +13,15 @@ const initState = {
 };
 
 // reducers
-export default function(state = initState, action) {
-  const { type, payload } = action;
-
-  switch (type) {
-    case SAY_HELLO:
-      return Object.assign({}, state, {
-        user: payload
-      });
-    case RECEIVE_CONTENT:
-      return Object.assign({}, state, {
-        content: payload
-      });
-    default:
-      return state;
+export default createReducer(initState, {
+  [SAY_HELLO]: (state, action) => {
+      console.log('called reducer')
+    state.user = action.payload;
+  },
+  [RECEIVE_CONTENT]: (state, action) => {
+    state.content = action.payload;
   }
-}
+});
 
 // action creators
 export const sayHello = user => ({
