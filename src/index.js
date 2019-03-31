@@ -1,18 +1,23 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import configStore from './configStore'
+import { Switch, Route } from "react-router-dom";
+import { ConnectedRouter } from "connected-react-router";
+import configStore, { history } from "./configStore";
 import { Provider } from "react-redux";
+// Google font for material-ui
+import "typeface-roboto";
 import "./index.css";
 
-import App from "./App";
-
 import * as serviceWorker from "./serviceWorker";
+import AppRouting from "./components/AppRouting";
 
-const store = configStore({})
+const store = configStore({});
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <ConnectedRouter history={history}>
+      <AppRouting />
+    </ConnectedRouter>
   </Provider>,
   document.getElementById("root")
 );

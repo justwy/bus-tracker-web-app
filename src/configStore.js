@@ -1,10 +1,16 @@
 import { configureStore, getDefaultMiddleware } from "redux-starter-kit";
 import { createEpicMiddleware } from "redux-observable";
 import logger from 'redux-logger'
+import { createBrowserHistory } from 'history'
+import { routerMiddleware } from 'connected-react-router'
+
+
 import {makeRequest} from './utils'
 
 import rootReducer from "./modules/reducers";
 import rootEpic from "./modules/epics";
+
+export const history = createBrowserHistory()
 
 const epicMiddleware = createEpicMiddleware({
   dependencies: { makeRequest, }
@@ -12,8 +18,8 @@ const epicMiddleware = createEpicMiddleware({
 
 export default function configureAppStore(preloadedState) {
   const store = configureStore({
-    reducer: rootReducer,
-    middleware: [epicMiddleware, logger, ...getDefaultMiddleware()],
+    reducer: rootReducer(history),
+    middleware: [epicMiddleware, logger, routerMiddleware(history), ...getDefaultMiddleware()],
     preloadedState,
     enhancers: []
   });
