@@ -1,6 +1,7 @@
 import { combineEpics } from "redux-observable";
-import { sayHelloEpic } from "./helloWorld";
+import { getBusRouteAndStopsEpic, getBusLocationsEpic } from "./busGeoInfo";
 
 export default combineEpics(
-    sayHelloEpic,
+    getBusRouteAndStopsEpic,
+    getBusLocationsEpic,
 );

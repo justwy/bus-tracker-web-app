@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import "./App.css";
-import SayHelloContainer from "./containers/SayHelloContainer";
+import BusMapContainer from "./containers/BusMapContainer";
 
 class App extends Component {
   render() {
     return (
       <div>
-        <SayHelloContainer/>
+        <BusMapContainer/>
       </div>
     );
   }

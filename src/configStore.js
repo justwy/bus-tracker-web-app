@@ -19,7 +19,7 @@ const epicMiddleware = createEpicMiddleware({
 export default function configureAppStore(preloadedState) {
   const store = configureStore({
     reducer: rootReducer(history),
-    middleware: [epicMiddleware, logger, routerMiddleware(history), ...getDefaultMiddleware()],
+    middleware: [epicMiddleware, logger, routerMiddleware(history), /*...getDefaultMiddleware()*/],
     preloadedState,
     enhancers: []
   });

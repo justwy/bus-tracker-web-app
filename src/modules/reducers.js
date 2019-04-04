@@ -2,9 +2,9 @@ import { combineReducers } from 'redux'
 import { connectRouter } from 'connected-react-router'
 
 
-import sayHello from './helloWorld'
+import busGeoInfo from './busGeoInfo'
 
 export default (history) => combineReducers({
-    sayHello, 
+    busGeoInfo, 
     router: connectRouter(history),
 })

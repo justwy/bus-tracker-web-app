@@ -1,12 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { Switch, Route } from "react-router-dom";
 import { ConnectedRouter } from "connected-react-router";
 import configStore, { history } from "./configStore";
 import { Provider } from "react-redux";
 // Google font for material-ui
 import "typeface-roboto";
 import "./index.css";
+import 'mapbox-gl/dist/mapbox-gl.css';
 
 import * as serviceWorker from "./serviceWorker";
 import AppRouting from "./components/AppRouting";
