@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from 'react';
 import ReactMapGL, { StaticMap } from "react-map-gl";
 import DeckGL, { GeoJsonLayer } from "deck.gl";
 import Color from "color";
@@ -42,6 +42,9 @@ function BusMapComponent({
 }) {
   console.log("routeCenter", routeCenter);
 
+  const [activeBusStop, setActiveBusStop] = useState(0);
+
+
   const busRouteLayer = new GeoJsonLayer({
     id: "`${activeBusId}`-route-layer",
     data: activeBusRoute,
@@ -84,10 +87,18 @@ function BusMapComponent({
     getElevation: 30,
     onHover: ({ object, x, y }) => {
       //const tooltip = object.properties.name || object.properties.station;
-      console.log(`hover on object ${JSON.stringify(object)} ${x} ${y}`);
+      //console.log(`hover on object ${JSON.stringify(object)} ${x} ${y}`);
+      if (object && object.properties) {
+        console.log(object.properties)
+      }
       /* Update tooltip
          http://deck.gl/#/documentation/developer-guide/adding-interactivity?section=example-display-a-tooltip-for-hovered-object
       */
+     setActiveBusStop({
+      displayObj: object ? object.properties || null : null,
+      pointerX: x,
+      pointerY: y
+    })
     }
   });
 
@@ -147,6 +158,7 @@ function BusMapComponent({
           layers={[busLocationsLayer, busRouteLayer, busStopsLayer]}
           onViewStateChange={onViewportChange}
         >
+          { renderTooltip(activeBusStop) }
           <StaticMap
             style={{ display: "flex", position: "static" }}
             // list of all predefined map styles: https://docs.mapbox.com/mapbox-gl-js/api/
@@ -192,6 +204,19 @@ function BusMapComponent({
           //}}
           message={<span>Cannot found the bus route {activeBusId}</span>}
         />
+    </div>
+  );
+}
+
+const renderTooltip = ({displayObj, pointerX, pointerY}) => {
+  let displayText = '';
+  if (displayObj) {
+    displayText = `${displayObj.name} - ${displayObj.id}`; 
+  }
+
+  return (
+    <div style={{position: 'absolute', zIndex: 1, pointerEvents: 'none', left: pointerX, top: pointerY}}>
+      { displayText }
     </div>
   );
 }

@@ -1,8 +1,8 @@
 import { ajax } from "rxjs/ajax";
 
 export const makeRequest = (resource, method = 'GET', body) => {
-    //const endpoint = 'http://localhost:8080'
-    const endpoint = 'http://192.168.86.101:8080'
+    const endpoint = 'http://localhost:8080'
+    //const endpoint = 'http://192.168.86.101:8080'
 
     let withCredentials = true;
     let ajaxRequest = {
