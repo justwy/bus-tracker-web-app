@@ -81,8 +81,8 @@ function BusMapComponent({
     getFillColor: Color("#1769aa")
       .rgb()
       .array(),
-    getRadius: 2,
-    pointRadiusMinPixels: 2,
+    getRadius: 10,
+    pointRadiusMinPixels: 3,
     getLineWidth: 1,
     getElevation: 30,
     onHover: ({ object, x, y }) => {
@@ -114,7 +114,7 @@ function BusMapComponent({
     getFillColor: Color("#ab003c")
       .rgb()
       .array(),
-    getRadius: 5,
+    getRadius: 15,
     pointRadiusMinPixels: 5,
     getLineWidth: 1,
     getElevation: 30,
